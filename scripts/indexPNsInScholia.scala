@@ -15,7 +15,7 @@ val scholiaXml = CorpusSource.fromUrl(xmlUrl, cexHeader=false)
 
 
 case class PersonOccurrence(passage: CtsUrn, personUrnString: String) {
-  def cex = passage.addVersion("v1") + "#" + personUrnString
+  def cex = passage + "#" + personUrnString.replaceFirst("pers:pers", "pers.v1:pers").replaceFirst(".r1:pers", ".v1:pers")
 }
 
 
@@ -26,7 +26,6 @@ val pairings = for (n <- scholiaXml.nodes) yield {
   pns.toVector.map(pn => {
     val attValue = pn.attributes.asAttrMap.getOrElse("n", "No @n attribute on " + pn.text)
     PersonOccurrence(n.urn, attValue)
-    //n.urn -> attValue
   })
 }
 
