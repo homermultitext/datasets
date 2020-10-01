@@ -13,4 +13,4 @@ This repository hosts a selection extracts from the HMT archive in simple, plain
 | [data/scholia-diplomatic.cex](./data/scholia-diplomatic.cex) | Diplomatic edition of scholia in CEX format | `hmt-2020i` |  Built with [scripts/scholia.sc](scripts/scholia.sc) |
 | [data/persons-index.cex](./data/persons-index.cex)  | Index of passages in scholia to personal name identifiers | `hmt-2020i` | Built with [scripts/indexPNsInScholia.scala](scripts/indexPNsInScholia.scala)
 | [data/scholia-sna.json](data/scholia-sna.json) | Graph of co-occurrences of personal names in scholia, in JSON | `hmt-2020i` | Built with [scripts/socialNetworkGraph.scala](scripts/socialNetworkGraph.scala) |
-| [data/scholia-sna.gml](data/scholia-sna.gml) format. | Graph of co-occurrences of personal names in scholia, in GML format. | `hmt-2020i` | Built with [scripts/socialNetworkGraph.scala](scripts/socialNetworkGraph.scala) |
+| [data/scholia-sna.gml](data/scholia-sna.gml)  | Graph of co-occurrences of personal names in scholia, in GML format. | `hmt-2020i` | Built with [scripts/socialNetworkGraph.scala](scripts/socialNetworkGraph.scala) |
