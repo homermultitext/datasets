@@ -18,6 +18,7 @@ import edu.holycross.shot.dse._
 
 val lib = CiteLibrarySource.fromUrl(url)
 val relations = lib.relationSet.get
+val libDse = DseVector.fromCiteLibrary(lib)
 
 
 // subset texts and relations for scholia only:
@@ -43,13 +44,39 @@ val indexOption = for (u <- canonicalUrns) yield {
 }
 
 val badIndex = indexOption.filter(_._2 == None).map(_._1)
-val goodPairs = indexOption.filter(_._2 != None).map(pr => pr._1 + "#" + pr._2)
+val goodPairs = indexOption.filter(_._2 != None).map(pr => (pr._1, pr._2.get.urn2))
+
+goodPairs.head._2 match {
+  case cts : CtsUrn => {
+  libDse.tbsForText(cts)
+
+  }
+  case _ => None
+}
+
+val goodTriples = goodPairs.map(pr => {
+  pr._2 match {
+    case cts : CtsUrn => {
+      val pg =  libDse.tbsForText(cts)
+      pg match {
+        case None => (pr._1, pr._2, "")
+        case _ => (pr._1, pr._2, pg.get)
+      }
+
+    }
+    case _ => None
+  }
+})
+
+
+
+
 
 
 indexOption.size
 badIndex.size
 import java.io.PrintWriter
 
-new PrintWriter("bad-scholion-iliad-inde.txt"){write(badIndex.mkString("\n"));close;}
+new PrintWriter("bad-scholion-iliad-index.txt"){write(badIndex.mkString("\n"));close;}
 
 new PrintWriter("scholion-iliad-index.cex"){write(goodPairs.mkString("\n"));close;}
